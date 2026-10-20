@@ -3,29 +3,27 @@ from tkinter import ttk
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-
-# Importamos la función que procesa el audio
 from procesamiento import capturar_y_procesar_audio
 
 
 def iniciar_interfaz():
-    # 1. Creación de la ventana
+    # Creación de la ventana
     ventana = tk.Tk()
     ventana.title("Analizador de Espectro Sonoro - Proyecto de Aula")
     ventana.geometry("1100x600")
 
-    # 2. Marco superior de controles
+    # Marco superior de controles
     marco_superior = ttk.Frame(ventana, padding=10)
     marco_superior.pack(side=tk.TOP, fill=tk.X)
 
-    # 3. Etiquetas
+    # Etiquetas
     etiqueta_estado = tk.Label(marco_superior, text="Estado: Listo", font=("Arial", 10, "bold"), fg="blue")
     etiqueta_estado.pack(side=tk.LEFT, padx=10)
 
     etiqueta_resultado = tk.Label(marco_superior, text="Frecuencia Fundamental: -- Hz", font=("Arial", 11, "bold"))
     etiqueta_resultado.pack(side=tk.RIGHT, padx=20)
 
-    # 4. Configuración de gráficas Matplotlib (lado a lado)
+    # Configuración de gráficas Matplotlib (lado a lado)
     fig, (ax_tiempo, ax_fft) = plt.subplots(1, 2, figsize=(10, 4.5))
     fig.tight_layout(pad=3.0)
 
@@ -42,7 +40,7 @@ def iniciar_interfaz():
     lienzo = FigureCanvasTkAgg(fig, master=ventana)
     lienzo.get_tk_widget().pack(side=tk.BOTTOM, fill=tk.BOTH, expand=True)
 
-    # 5. Función que se ejecuta al presionar el botón
+    # Función que se ejecuta al presionar el botón
     def evento_boton():
         etiqueta_estado.config(text="Estado: 🔴 Grabando...", fg="red")
         ventana.update()
@@ -76,5 +74,5 @@ def iniciar_interfaz():
     boton_grabar = ttk.Button(marco_superior, text="🎤 Iniciar Grabación (3s)", command=evento_boton)
     boton_grabar.pack(side=tk.LEFT, padx=10)
 
-    # 6. Mantiene la ventana abierta
+    # Mantiene la ventana abierta
     ventana.mainloop()
