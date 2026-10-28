@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 import numpy as np
 import matplotlib.pyplot as plt
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, NavigationToolbar2Tk)
 from procesamiento import capturar_y_procesar_audio
 
 
@@ -74,5 +74,10 @@ def iniciar_interfaz():
     boton_grabar = ttk.Button(marco_superior, text="🎤 Iniciar Grabación (3s)", command=evento_boton)
     boton_grabar.pack(side=tk.LEFT, padx=10)
 
+    # Barra de herramientas de matplotlib para hacer zoom
+    barra_herramientas = NavigationToolbar2Tk(lienzo, marco_superior)
+    barra_herramientas.update()
+    barra_herramientas.pack(side=tk.LEFT,padx=10)
+
     # Mantiene la ventana abierta
-    ventana.mainloop()
+    ventana.mainloop()  
